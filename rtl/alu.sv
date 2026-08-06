@@ -20,18 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALU(input logic [31:0] a, b,
-           input logic [1:0] ALUK,
+module ALU(input logic [31:0] RS1, RS2,
+           input logic [2:0] ALUK,
            output logic [31:0] alu_out
 
     );
     always_comb begin
       
         unique case (ALUK)
-            2'b00: alu_out = a + b;
-            2'b01: alu_out = a & b;
-            2'b10: alu_out = ~a;
-            2'b11: alu_out = a;
+            3'b000: alu_out = RS1 + RS2;
+            3'b001: alu_out = RS1 & RS2;
+            3'b010: alu_out = RS1 + (~RS2+32'h0001);
+            3'b011: alu_out = RS1 ^ RS2;
+            3'b100: alu_put = RS1 || RS2;
             default : alu_out = 32'h0000;
          endcase
     end
