@@ -28,5 +28,5 @@ module reg_file(input logic clk,
     end
             
 endmodule
-.a(RS1),
+
 
