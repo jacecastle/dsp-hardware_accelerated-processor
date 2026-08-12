@@ -5,13 +5,12 @@ module PC(input   logic        clk,
 );
     always_ff(@posedge clk) begin
         if(reset)
-            pc_next <= 32'h0000;
+            pc <= 32'h0000;
         else begin
-            pc_next <= pc + 32'h0004; 
-
+            pc <= pc_next;
                  
         end
 
-        pc <= pc_next;
+        
     end
 endmodule

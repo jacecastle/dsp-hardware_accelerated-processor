@@ -21,18 +21,18 @@
 
 
 module ALU(input logic [31:0] rs1, rs2,
-           input logic [2:0] ALUK,
+           input logic [2:0] alu_op,
            output logic [31:0] alu_out
 
     );
     always_comb begin
       
-        unique case (ALUK)
+        unique case (alu_op)
             3'b000: alu_out = rs1 + rs2;
             3'b001: alu_out = rs1 & rs2;
             3'b010: alu_out = rs1 + (~rs2+32'h0001);
             3'b011: alu_out = rs1 ^ rs2;
-            3'b100: alu_put = rs1 || rs2;
+            3'b100: alu_out = rs1 || rs2;
             default : alu_out = 32'h0000;
          endcase
     end

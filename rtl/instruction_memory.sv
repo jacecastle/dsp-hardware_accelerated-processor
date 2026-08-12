@@ -1,5 +1,5 @@
 module instruction_mem (
-    input  logic [31:0] pc_addr,
+    input  logic [31:0] pc,
     output logic [31:0] instr
 );
 
