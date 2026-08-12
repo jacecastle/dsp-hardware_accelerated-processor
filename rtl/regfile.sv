@@ -22,7 +22,7 @@ module reg_file(input logic clk,
                 reg_file[i] <= 32'h0000;
             end
         end
-        else if(ld_reg)begin
+        else if(ld_reg && RD != 5'd0)begin
             reg_file[RD]<=wr_data;    
         end
     end
