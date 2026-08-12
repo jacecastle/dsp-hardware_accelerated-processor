@@ -8,7 +8,7 @@ module top_module(
 
     //wire goes to input of pc module
     logic [31:0] pc_next;
-    assign pc_next = pc + 32'h0004; //incrementing the pc by 4 to get the next instruction (mini-adder)
+    assign pc_next = pc_addr + 32'h0004; //incrementing the pc by 4 to get the next instruction (mini-adder)
 
     //wires from decoder to input of reg_file
     logic RegWr;
@@ -25,7 +25,7 @@ module top_module(
     logic [31:0] alu_out;
     assign wr_data = alu_out; //connecting the output of ALU to the input of reg_file
 
-    instruction_memory instruction_memory (
+    instruction_mem instruction_memory (
         .pc_addr(pc_addr), //connecting the wire pc_addr to the input of instruction_mem
         .instr(instr) //connecting the output of instruction_mem to the wire instr
     );

@@ -1,0 +1,129 @@
+$date
+	Wed Aug 12 14:50:03 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module top_module_tb $end
+$var reg 1 ! clk $end
+$var reg 1 " reset $end
+$scope module dut $end
+$var wire 1 ! clk $end
+$var wire 1 " reset $end
+$var wire 32 # wr_data [31:0] $end
+$var wire 5 $ rs2 [4:0] $end
+$var wire 5 % rs1 [4:0] $end
+$var wire 5 & rd [4:0] $end
+$var wire 32 ' pc_next [31:0] $end
+$var wire 32 ( pc_addr [31:0] $end
+$var wire 32 ) instr [31:0] $end
+$var wire 32 * alu_out [31:0] $end
+$var wire 3 + alu_op [2:0] $end
+$var wire 1 , RegWr $end
+$var wire 32 - RS2_out [31:0] $end
+$var wire 32 . RS1_out [31:0] $end
+$scope module ALU $end
+$var wire 32 / rs2 [31:0] $end
+$var wire 32 0 rs1 [31:0] $end
+$var wire 3 1 alu_op [2:0] $end
+$var reg 32 2 alu_out [31:0] $end
+$upscope $end
+$scope module PC $end
+$var wire 1 ! clk $end
+$var wire 32 3 pc_next [31:0] $end
+$var wire 1 " reset $end
+$var reg 32 4 pc_addr [31:0] $end
+$upscope $end
+$scope module decoder $end
+$var wire 5 5 rs2 [4:0] $end
+$var wire 5 6 rs1 [4:0] $end
+$var wire 5 7 rd [4:0] $end
+$var wire 7 8 opcode [6:0] $end
+$var wire 32 9 instruction [31:0] $end
+$var wire 7 : funct7 [6:0] $end
+$var wire 3 ; funct3 [2:0] $end
+$var reg 1 , RegWr $end
+$var reg 3 < alu_op [2:0] $end
+$upscope $end
+$scope module instruction_memory $end
+$var wire 32 = instr [31:0] $end
+$var wire 32 > pc_addr [31:0] $end
+$var parameter 32 ? ADDR_WIDTH $end
+$var parameter 40 @ DEPTH $end
+$var parameter 88 A MEM_FILE $end
+$upscope $end
+$scope module regfile $end
+$var wire 5 B RD [4:0] $end
+$var wire 5 C RS1 [4:0] $end
+$var wire 32 D RS1_out [31:0] $end
+$var wire 5 E RS2 [4:0] $end
+$var wire 32 F RS2_out [31:0] $end
+$var wire 1 ! clk $end
+$var wire 1 , ld_reg $end
+$var wire 1 " reset $end
+$var wire 32 G wr_data [31:0] $end
+$var integer 32 H i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b111000001110010011011110110011101110010011000010110110100101110011000100110100101101110 A
+b100000000 @
+b1000 ?
+$end
+#0
+$dumpvars
+bx H
+bx G
+bx F
+bx E
+bx D
+bx C
+bx B
+bx >
+bx =
+b0 <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+bx 2
+b0 1
+bx 0
+bx /
+bx .
+bx -
+0,
+b0 +
+bx *
+bx )
+bx (
+bx '
+bx &
+bx %
+bx $
+bx #
+1"
+0!
+$end
+#5000000000000
+0"
+1!
+#10000000000000
+0!
+#15000000000000
+1!
+#20000000000000
+0!
+#25000000000000
+1!

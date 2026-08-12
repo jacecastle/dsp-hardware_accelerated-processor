@@ -4,10 +4,17 @@ module decoder(input logic [31:0] instruction,
                output logic [4:0] rs1, rs2, rd
 );
 
-logic [6:0] opcode = instruction[6:0];
-logic [2:0] funct3 = instruction[14:12];
-logic [6:0] funct7 = instruction[31:25];
+logic [6:0] opcode;
+logic [2:0] funct3;
+logic [6:0] funct7;
 
+assign opcode = instruction[6:0];
+assign funct3 = instruction[14:12];
+assign funct7 = instruction[31:25];
+
+assign rs1 = instruction[19:15];
+assign rs2 = instruction[24:20];
+assign rd  = instruction[11:7];
 
 always_comb begin
     RegWr = 1'b0;
@@ -17,9 +24,6 @@ always_comb begin
 
     //rtype
     7'b0110011: begin
-    assign rs1 = instruction[19:15];
-    assign rs2 = instruction[24:20];
-    assign rd  = instruction[11:7];
         RegWr = 1'b1;
         case(funct3)
             3'b000: begin
