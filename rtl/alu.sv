@@ -32,7 +32,7 @@ module ALU(input logic [31:0] rs1, rs2,
             3'b001: alu_out = rs1 - rs2;
             3'b010: alu_out = rs1 & rs2;
             3'b011: alu_out = rs1 ^ rs2;
-            3'b100: alu_out = rs1 || rs2;
+            3'b100: alu_out = rs1 | rs2;
             default : alu_out = 32'h0000;
          endcase
     end
