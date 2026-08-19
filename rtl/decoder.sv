@@ -47,7 +47,7 @@ always_comb begin
                 alu_op = 3'b100; //or
 
             3'b100:
-                alu_op = 3'011;
+                alu_op = 3'011; //xor
         endcase
     end
 
@@ -61,6 +61,8 @@ always_comb begin
                 alu_op = 3'b010; //andi
             3'b110:
                 alu_op = 3'b100; //ori
+            3'b100:
+                alu_op = 3'b011; //xori
         endcase
     end
 
