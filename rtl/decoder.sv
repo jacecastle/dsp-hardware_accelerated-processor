@@ -54,13 +54,17 @@ always_comb begin
     7'b0010011: begin
         RegWr = 1'b1; 
         ALUSrc = 1'b0;
-    end
-
-
+        case(funct3)
+            3'b000:
+                alu_op = 3'b000; //addi
+            3'b111:
+                alu_op = 3'b010; //andi
+            3'b110:
+                alu_op = 3'b100; //ori
         endcase
     end
 
-      
+    endcase
     
     
 
