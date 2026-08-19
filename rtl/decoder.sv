@@ -2,7 +2,7 @@ module decoder(input logic [31:0] instruction,
                output logic [2:0] alu_op,
                output logic RegWr, 
                output logic ALUSrc,
-               output logic [4:0] rs1, rs2, rd
+               output logic [4:0] rs1, rs2, rd,
                output logic [31:0] immediate
 );
 
@@ -25,6 +25,7 @@ assign immediate = {{20{instruction[31]}}, instruction[31:20]};
 always_comb begin
     RegWr = 1'b0;
     alu_op = 3'b0;
+    ALUSrc = 1'b0;
     
     case(opcode)
 
@@ -47,7 +48,7 @@ always_comb begin
                 alu_op = 3'b100; //or
 
             3'b100:
-                alu_op = 3'011; //xor
+                alu_op = 3'b011; //xor
         endcase
     end
 
