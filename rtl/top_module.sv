@@ -25,6 +25,12 @@ module top_module(
     logic [31:0] alu_out;
     assign wr_data = alu_out; //connecting the output of ALU to the input of reg_file
 
+    //ALUSrc
+    logic ALUSrc;
+    logic [31:0] imm ;
+    logic [31:0] ALU2;
+    assign ALU2 = (ALUSrc) ? RS2_out : imm;
+
     instruction_mem instruction_memory (
         .pc_addr(pc_addr), //connecting the wire pc_addr to the input of instruction_mem
         .instr(instr) //connecting the output of instruction_mem to the wire instr
@@ -34,9 +40,11 @@ module top_module(
         .instruction(instr), //connecting the wire instr to the input of decoder
         .alu_op(alu_op), //connecting the output of decoder to the wire alu_op
         .RegWr(RegWr), //connecting the output of decoder to the wire RegWr
+        .ALUSrc(ALUSrc), 
         .rs1(rs1), //connecting the output of decoder to the wire rs1
         .rs2(rs2), //connecting the output of decoder to the wire rs2
-        .rd(rd) //connecting the output of decoder to the wire rd
+        .rd(rd), //connecting the output of decoder to the wire rd
+        .immediate(imm)
     );
 
     PC PC (
@@ -60,7 +68,7 @@ module top_module(
 
     ALU ALU (
         .rs1(RS1_out), //connecting the wire RS1_out to the input of ALU
-        .rs2(RS2_out), //connecting the wire RS2_out to the input of ALU
+        .rs2(ALU2), //connecting the wire RS2_out to the input of ALU
         .alu_op(alu_op), //connecting the wire alu_op to the control input of ALU
         .alu_out(alu_out) //connecting the output of ALU to the wire alu_out
     );
