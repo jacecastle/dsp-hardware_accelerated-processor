@@ -23,7 +23,11 @@ module top_module(
 
     //wire from output of ALU to input of reg_file
     logic [31:0] alu_out;
-    assign wr_data = alu_out; //connecting the output of ALU to the input of reg_file
+    //wire from output of data_memory to input of reg_file
+    logic [31:0] data_out;
+   // assign wr_data = alu_out; //connecting the output of ALU to the input of reg_file
+   // assign wr_data = data_out; //connecting the output of data_memory to the input of reg_file
+    assign wr_data = (MemRd) ? data_out : alu_out; //if MemRd is high, then we're writing from memory
 
     //ALUSrc
     logic ALUSrc;
@@ -40,7 +44,10 @@ module top_module(
         .instruction(instr), //connecting the wire instr to the input of decoder
         .alu_op(alu_op), //connecting the output of decoder to the wire alu_op
         .RegWr(RegWr), //connecting the output of decoder to the wire RegWr
-        .ALUSrc(ALUSrc), 
+        .ALUSrc(ALUSrc),
+        .MemWr(MemWr),
+        .MemRd(MemRd),
+        .ld_type(ld_type), 
         .rs1(rs1), //connecting the output of decoder to the wire rs1
         .rs2(rs2), //connecting the output of decoder to the wire rs2
         .rd(rd), //connecting the output of decoder to the wire rd
@@ -71,6 +78,27 @@ module top_module(
         .rs2(ALU2), //connecting the wire RS2_out to the input of ALU
         .alu_op(alu_op), //connecting the wire alu_op to the control input of ALU
         .alu_out(alu_out) //connecting the output of ALU to the wire alu_out
+    );
+
+    data_mem data_memory (
+        .clk(clk), //connecting the input clk to the input of data_memory
+        .data_addr(alu_out), //connecting the wire alu_out to the input of data_memory
+        .data_in(RS2_out), //connecting the wire RS2_out to the input of data_memory
+        .MemWr(MemWr), //connecting the wire MemWr to the input of data_memory
+        .MemRd(MemRd), //connecting the wire MemRd to the input of data_memory
+        .data_out(data_out) //connecting the output of data_memory to the wire data_out
+    );
+
+    load_unit load_unit (
+        .ld_type(ld_type), //connecting the wire ld_type to the input of load_unit
+        .ld_in(data_out), //connecting the wire data_out to the input of load_unit
+        .ld_out(wr_data) //connecting the output of load_unit to the wire wr_data
+    );
+
+    store_unit store_unit (
+        .st_type(st_type), //connecting the wire st_type to the input of store_unit
+        .st_in(RS2_out), //connecting the wire RS2_out to the input of store_unit
+        .st_out(data_out) //connecting the output of store_unit to the wire data_out
     );
 
 
